@@ -24,19 +24,13 @@ ifneq ($(BUILD_WITH_COLORS),0)
     include $(TOP_DIR)vendor/du/build/core/colors.mk
 endif
 
-ifeq ($(TARGET_BACON_NAME),)
-    INTERNAL_BACON_NAME := $(TARGET_PRODUCT)-$(PLATFORM_VERSION)-$(shell date -u +%Y%m%d)
-else
-    INTERNAL_BACON_NAME := $(TARGET_BACON_NAME)
-endif
-
-INTERNAL_BACON_TARGET := $(PRODUCT_OUT)/$(INTERNAL_BACON_NAME).zip
+DU_TARGET_PACKAGE := $(PRODUCT_OUT)/$(DU_VERSION).zip
 
 .PHONY: corvus
-corvus: $(INTERNAL_OTA_PACKAGE_TARGET)
-	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(INTERNAL_BACON_TARGET)
-	$(hide) $(MD5SUM) $(INTERNAL_BACON_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(INTERNAL_BACON_TARGET).md5sum
-	#@echo "Package Complete: $(INTERNAL_BACON_TARGET)" >&2
+bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(DU_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(DU_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(DU_TARGET_PACKAGE).md5sum
+	#@echo "Package Complete: $(DU_TARGET_PACKAGE)" >&2
 
 	@echo  ${CL_MAG}""${CL_MAG}
 	@echo -e ${CL_MAG}"...............#######..######..######.##...........##.##.....##..######............"${CL_MAG}
