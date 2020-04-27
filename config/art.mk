@@ -30,7 +30,7 @@ PRODUCT_SYSTEM_SERVER_COMPILER_FILTER := speed-profile
 
 # Dexopt boot types
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    pm.dexopt.first-boot=extract \
+    pm.dexopt.first-boot=quicken \
     pm.dexopt.boot=verify
 
 # Dexopt filters
